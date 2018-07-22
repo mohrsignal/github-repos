@@ -9,4 +9,15 @@ create_connection <- function() {
                         billing = project_id)
 }
 
+get_langauge_repos <- function(con, language_name) {
+  
+  languages <- tbl(con, "languages")
+  
+  languages %>% 
+    as.tibble() %>% 
+    filter(map_lgl(language,
+                   contains_language,
+                   language_name))
+}
+
 # https://www.jessesadler.com/post/network-analysis-with-r/
